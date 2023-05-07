@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.books.app.data.BannerInfo
 import com.books.app.data.Book
 import com.books.app.repositories.BooksRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,9 +19,18 @@ class MainViewModel @Inject constructor(
     private val _listOfBooks = MutableLiveData<List<Book?>>()
     val listOfBooks: LiveData<List<Book?>> = _listOfBooks
 
+    private val _listOfTopBannerSliders = MutableLiveData<List<BannerInfo?>>()
+    val listOfTopBannerSliders: LiveData<List<BannerInfo?>> = _listOfTopBannerSliders
+
     fun getAllBooksFromFirebase() {
         viewModelScope.launch {
            _listOfBooks.value = booksRepository.getAllBooks()
+        }
+    }
+
+    fun getTopBannerSliders() {
+        viewModelScope.launch {
+            _listOfTopBannerSliders.value = booksRepository.getBannersInfo()
         }
     }
 }

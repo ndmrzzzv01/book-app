@@ -10,4 +10,6 @@
 
     <color name="color_text_splash">#DD48A1</color>
     <color name="track_color">#80FFFFFF</color>
+    
+    <color name="selector">#00FFFFFF</color>
 </resources>
