@@ -16,4 +16,6 @@ class ItemBookViewHolder(private val binding: ItemBookBinding) :
             .into(binding.imgPoster)
         binding.tvName.text = book?.name
     }
+
+    val mainLayout = binding.imageBackground
 }

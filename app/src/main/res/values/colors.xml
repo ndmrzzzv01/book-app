@@ -12,4 +12,5 @@
     <color name="track_color">#80FFFFFF</color>
     
     <color name="selector">#00FFFFFF</color>
+    <color name="title_color">#D9D5D6</color>
 </resources>

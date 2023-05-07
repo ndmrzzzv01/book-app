@@ -3,12 +3,17 @@ package com.books.app.screens.main.views.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.books.app.OnBookItemClick
 import com.books.app.data.BannerInfo
 import com.books.app.databinding.ItemBannerBinding
+import com.books.app.screens.detail.DetailFragment
+import com.books.app.screens.main.views.holders.SliderBannerViewHolder
 import com.bumptech.glide.Glide
 
-class SliderBannerPagerAdapter(private var listOfTopBannerSliders: List<BannerInfo?>) :
-    RecyclerView.Adapter<SliderBannerPagerAdapter.SliderBannerViewHolder>() {
+class SliderBannerPagerAdapter(
+    private var listOfTopBannerSliders: List<BannerInfo?>,
+    private val onBookItemClick: OnBookItemClick
+) : RecyclerView.Adapter<SliderBannerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderBannerViewHolder {
         val view =
@@ -18,6 +23,9 @@ class SliderBannerPagerAdapter(private var listOfTopBannerSliders: List<BannerIn
 
     override fun onBindViewHolder(holder: SliderBannerViewHolder, position: Int) {
         val slider = listOfTopBannerSliders[position]
+        holder.mainLayout.setOnClickListener {
+            onBookItemClick.onClick(DetailFragment.SLIDERS_VALUES_KEY, position)
+        }
         holder.bind(slider)
     }
 
@@ -28,11 +36,5 @@ class SliderBannerPagerAdapter(private var listOfTopBannerSliders: List<BannerIn
         notifyDataSetChanged()
     }
 
-    inner class SliderBannerViewHolder(private val binding: ItemBannerBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(sliderItem: BannerInfo?) {
-            Glide.with(binding.imageBanner).load(sliderItem?.cover).into(binding.imageBanner)
-        }
-    }
 }
 

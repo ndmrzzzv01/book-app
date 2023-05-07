@@ -1,16 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lol"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="viewModel"
+            type="com.books.app.screens.detail.DetailViewModel" />
+    </data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#532454">
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/back_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_back" />
+
+            <TextView
+                android:id="@+id/tv_title_of_the_book"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/nunito_sans"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:text="@{viewModel.currentBook.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pager"
+                tools:text="If It’s Only Love" />
+
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/nunito_sans"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:text="@{viewModel.currentBook.author}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_of_the_book"
+                tools:text="Zoey Evers" />
+
+            <View
+                android:id="@+id/header_of_description"
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/header_of_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_author" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_of_description">
+
+                <TextView
+                    android:id="@+id/tv_number_of_readers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:text="@{viewModel.currentBook.views}"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_number_of_likes"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="22.4K" />
+
+                <TextView
+                    android:id="@+id/tv_number_of_likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:text="@{viewModel.currentBook.likes}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_number_of_readers"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_number_of_quotes"
+                    app:layout_constraintStart_toEndOf="@id/tv_number_of_readers"
+                    app:layout_constraintTop_toTopOf="@id/tv_number_of_readers"
+                    tools:text="10.4K" />
+
+                <TextView
+                    android:id="@+id/tv_number_of_quotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:text="@{viewModel.currentBook.quotes}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_number_of_likes"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_type_of_genre"
+                    app:layout_constraintStart_toEndOf="@id/tv_number_of_likes"
+                    app:layout_constraintTop_toTopOf="@id/tv_number_of_likes"
+                    tools:text="32.5K" />
+
+                <TextView
+                    android:id="@+id/tv_type_of_genre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:text="@{viewModel.currentBook.genre}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_number_of_quotes"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_number_of_quotes"
+                    app:layout_constraintTop_toTopOf="@id/tv_number_of_quotes"
+                    tools:text="Hooot" />
+
+                <TextView
+                    android:id="@+id/tv_title_reader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="Readers"
+                    android:textColor="@color/title_color"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_number_of_readers"
+                    app:layout_constraintStart_toStartOf="@+id/tv_number_of_readers"
+                    app:layout_constraintTop_toBottomOf="@id/tv_number_of_readers" />
+
+                <TextView
+                    android:id="@+id/tv_title_likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="Likes"
+                    android:textColor="@color/title_color"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_title_reader"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_number_of_likes"
+                    app:layout_constraintStart_toStartOf="@+id/tv_number_of_likes"
+                    app:layout_constraintTop_toTopOf="@id/tv_title_reader" />
+
+                <TextView
+                    android:id="@+id/tv_title_quotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="Quotes"
+                    android:textColor="@color/title_color"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_title_likes"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_number_of_quotes"
+                    app:layout_constraintStart_toStartOf="@+id/tv_number_of_quotes"
+                    app:layout_constraintTop_toTopOf="@id/tv_title_likes" />
+
+                <TextView
+                    android:id="@+id/tv_title_genre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="Genre"
+                    android:textColor="@color/title_color"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_title_quotes"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_type_of_genre"
+                    app:layout_constraintStart_toStartOf="@+id/tv_type_of_genre"
+                    app:layout_constraintTop_toTopOf="@id/tv_title_quotes" />
+
+                <View
+                    android:id="@+id/divider"
+                    style="@style/Divider"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_reader" />
+
+                <TextView
+                    android:id="@+id/tv_title_summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="Summary"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:text="@{viewModel.currentBook.summary}"
+                    app:layout_constraintEnd_toEndOf="@id/tv_title_summary"
+                    app:layout_constraintStart_toStartOf="@id/tv_title_summary"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_summary"
+                    tools:text="According to researchers at Duke University, habits account for about 40 percent of our behaviors on any given day. Your life today is essentially the sum of your habits. How in shape or out of shape you are? A result of your habits. How happy or unhappy you are? A result of your habits. How successful or unsuccessful you are? A result of your habits." />
+
+                <View
+                    android:id="@+id/second_divider"
+                    style="@style/Divider"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_you_will_also_like"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:fontFamily="@font/nunito_sans"-->
+<!--                    android:text="You will also like"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/second_divider" />-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/rv_also_like"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tv_you_will_also_like" />-->
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_read_now"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#DD48A1"
+                    android:fontFamily="@font/nunito_sans"
+                    android:text="Read now"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/second_divider" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

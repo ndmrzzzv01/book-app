@@ -16,15 +16,21 @@ class MainViewModel @Inject constructor(
     private val booksRepository: BooksRepository
 ): ViewModel() {
 
-    private val _listOfBooks = MutableLiveData<List<Book?>>()
-    val listOfBooks: LiveData<List<Book?>> = _listOfBooks
+    private val _mutableMapOfBooks = MutableLiveData<Map<String, List<Book>>>()
+    val mapOfBooks: LiveData<Map<String, List<Book>>> = _mutableMapOfBooks
 
     private val _listOfTopBannerSliders = MutableLiveData<List<BannerInfo?>>()
     val listOfTopBannerSliders: LiveData<List<BannerInfo?>> = _listOfTopBannerSliders
 
     fun getAllBooksFromFirebase() {
         viewModelScope.launch {
-           _listOfBooks.value = booksRepository.getAllBooks()
+            val hashOfTitleAndBooks = mutableMapOf<String, List<Book>>()
+            val listOfBooks = booksRepository.getAllBooks()
+            for (book in listOfBooks) {
+                val listOfBooksByGenre = listOfBooks.filter { it.genre == book.genre }
+                hashOfTitleAndBooks[book.genre ?: ""] = listOfBooksByGenre
+            }
+           _mutableMapOfBooks.value = hashOfTitleAndBooks
         }
     }
 

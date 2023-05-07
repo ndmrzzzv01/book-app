@@ -1,18 +1,15 @@
 package com.books.app.screens.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.books.app.OnBookItemClick
-import com.books.app.data.Book
 import com.books.app.databinding.FragmentMainBinding
 import com.books.app.screens.main.views.adapters.ItemCategoryAdapter
 import com.books.app.screens.main.views.adapters.SliderBannerPagerAdapter
@@ -26,12 +23,10 @@ class MainFragment : Fragment(), OnBookItemClick {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by activityViewModels<MainViewModel>()
 
-    private val adapter = ItemCategoryAdapter(hashMapOf())
-    private val bannerAdapter = SliderBannerPagerAdapter(listOf())
-
-    private val hashOfTitleAndBooks = mutableMapOf<String, List<Book?>>()
+    private val adapter = ItemCategoryAdapter(hashMapOf(), this)
+    private val bannerAdapter = SliderBannerPagerAdapter(listOf(), this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,12 +45,8 @@ class MainFragment : Fragment(), OnBookItemClick {
     }
 
     private fun initObservers() {
-        viewModel.listOfBooks.observe(viewLifecycleOwner) { listOfBooks ->
-            for (book in listOfBooks) {
-                val listOfBooksByGenre = listOfBooks.filter { it?.genre == book?.genre }
-                hashOfTitleAndBooks[book?.genre ?: ""] = listOfBooksByGenre
-            }
-            adapter.updateHashOfTitlesAndBooks(hashOfTitleAndBooks)
+        viewModel.mapOfBooks.observe(viewLifecycleOwner) { mapOfBooks ->
+            adapter.updateHashOfTitlesAndBooks(mapOfBooks)
             binding.rvCategories.adapter = adapter
             binding.rvCategories.layoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
@@ -69,9 +60,9 @@ class MainFragment : Fragment(), OnBookItemClick {
         }
     }
 
-    override fun onClick(id: Int) {
+    override fun onClick(key: String, index: Int) {
         findNavController().navigate(
-            MainFragmentDirections.actionMainFragmentToDetailFragment(id)
+            MainFragmentDirections.actionMainFragmentToDetailFragment(key, index)
         )
     }
 

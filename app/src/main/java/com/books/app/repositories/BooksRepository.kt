@@ -1,9 +1,7 @@
 package com.books.app.repositories
 
-import com.books.app.data.BannerInfo
-import com.books.app.data.Book
-import com.books.app.data.BooksResponse
-import com.books.app.data.TopBannerSlidesResponse
+import android.util.Log
+import com.books.app.data.*
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.gson.Gson
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -17,10 +15,6 @@ class BooksRepository @Inject constructor() {
         val listOfBooks = mutableListOf<Book>()
         val gson = Gson()
         val remoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
-        val defaultConfigs = mapOf(
-            "json_data" to "books"
-        )
-        remoteConfig.setDefaultsAsync(defaultConfigs)
         remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val books =
@@ -36,10 +30,6 @@ class BooksRepository @Inject constructor() {
         val listOfBannersTopSlides = mutableListOf<BannerInfo>()
         val gson = Gson()
         val remoteConfig: FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
-        val defaultConfigs = mapOf(
-            "json_data" to "top_banner_slides"
-        )
-        remoteConfig.setDefaultsAsync(defaultConfigs)
         remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val topBannerSlides =
@@ -50,5 +40,4 @@ class BooksRepository @Inject constructor() {
         }.await()
         return listOfBannersTopSlides
     }
-
 }

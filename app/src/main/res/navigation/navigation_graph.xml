@@ -21,7 +21,10 @@
         android:name="com.books.app.screens.detail.DetailFragment"
         android:label="DetailFragment" >
         <argument
-            android:name="bookId"
+            android:name="key"
+            app:argType="string" />
+        <argument
+            android:name="index"
             app:argType="integer" />
     </fragment>
 
