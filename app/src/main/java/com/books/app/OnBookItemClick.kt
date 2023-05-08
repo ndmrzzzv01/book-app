@@ -1,5 +1,5 @@
 package com.books.app
 
 interface OnBookItemClick {
-    fun onClick(key: String, index: Int)
+    fun onBookItemClick(key: String, index: Int)
 }

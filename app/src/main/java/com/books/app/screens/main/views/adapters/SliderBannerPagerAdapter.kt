@@ -8,7 +8,6 @@ import com.books.app.data.BannerInfo
 import com.books.app.databinding.ItemBannerBinding
 import com.books.app.screens.detail.DetailFragment
 import com.books.app.screens.main.views.holders.SliderBannerViewHolder
-import com.bumptech.glide.Glide
 
 class SliderBannerPagerAdapter(
     private var listOfTopBannerSliders: List<BannerInfo?>,
@@ -24,7 +23,7 @@ class SliderBannerPagerAdapter(
     override fun onBindViewHolder(holder: SliderBannerViewHolder, position: Int) {
         val slider = listOfTopBannerSliders[position]
         holder.mainLayout.setOnClickListener {
-            onBookItemClick.onClick(DetailFragment.SLIDERS_VALUES_KEY, slider?.bookId ?: 0)
+            onBookItemClick.onBookItemClick(DetailFragment.SLIDERS_VALUES_KEY, slider?.bookId ?: 0)
         }
         holder.bind(slider)
     }

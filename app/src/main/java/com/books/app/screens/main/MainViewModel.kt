@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val booksRepository: BooksRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _mutableMapOfBooks = MutableLiveData<Map<String, List<Book>>>()
     val mapOfBooks: LiveData<Map<String, List<Book>>> = _mutableMapOfBooks
@@ -30,7 +30,7 @@ class MainViewModel @Inject constructor(
                 val listOfBooksByGenre = listOfBooks.filter { it.genre == book.genre }
                 hashOfTitleAndBooks[book.genre ?: ""] = listOfBooksByGenre
             }
-           _mutableMapOfBooks.value = hashOfTitleAndBooks
+            _mutableMapOfBooks.value = hashOfTitleAndBooks
         }
     }
 

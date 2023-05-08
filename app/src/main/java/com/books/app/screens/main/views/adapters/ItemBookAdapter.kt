@@ -21,7 +21,7 @@ class ItemBookAdapter(
     override fun onBindViewHolder(holder: ItemBookViewHolder, position: Int) {
         val book = listOfBooks[position]
         holder.mainLayout.setOnClickListener {
-            onBookItemClick.onClick(book?.genre ?: "", position)
+            onBookItemClick.onBookItemClick(book?.genre ?: "", position)
         }
         holder.bind(book)
     }

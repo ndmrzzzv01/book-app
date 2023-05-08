@@ -45,22 +45,22 @@ class MainFragment : Fragment(), OnBookItemClick {
     }
 
     private fun initObservers() {
+        viewModel.listOfTopBannerSliders.observe(viewLifecycleOwner) { listOfBannersInfo ->
+            bannerAdapter.updateList(listOfBannersInfo)
+            binding.pager.adapter = bannerAdapter
+            binding.pager.autoScroll(4000, listOfBannersInfo.size)
+            TabLayoutMediator(binding.tablayout, binding.pager) { _, _ -> }.attach()
+        }
+
         viewModel.mapOfBooks.observe(viewLifecycleOwner) { mapOfBooks ->
             adapter.updateHashOfTitlesAndBooks(mapOfBooks)
             binding.rvCategories.adapter = adapter
             binding.rvCategories.layoutManager =
                 LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         }
-
-        viewModel.listOfTopBannerSliders.observe(viewLifecycleOwner) { listOfBannersInfo ->
-            bannerAdapter.updateList(listOfBannersInfo)
-            binding.pager.adapter = bannerAdapter
-            binding.pager.autoScroll(3000, listOfBannersInfo.size)
-            TabLayoutMediator(binding.tablayout, binding.pager) { _, _ -> }.attach()
-        }
     }
 
-    override fun onClick(key: String, index: Int) {
+    override fun onBookItemClick(key: String, index: Int) {
         findNavController().navigate(
             MainFragmentDirections.actionMainFragmentToDetailFragment(key, index)
         )
