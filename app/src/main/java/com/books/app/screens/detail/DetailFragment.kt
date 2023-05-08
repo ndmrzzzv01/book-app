@@ -14,6 +14,7 @@ import com.books.app.data.Book
 import com.books.app.databinding.FragmentDetailBinding
 import com.books.app.screens.detail.views.adapters.CarouselPagerAdapter
 import com.books.app.screens.main.MainViewModel
+import com.books.app.views.adjustViewPager
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -21,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     companion object {
-        val SLIDERS_VALUES_KEY = "slider"
+        const val SLIDERS_VALUES_KEY = "slider"
     }
 
     private var _binding: FragmentDetailBinding? = null
@@ -52,7 +53,7 @@ class DetailFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
-
+        binding.pager.adjustViewPager(requireContext())
         binding.pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 detailViewModel.setCurrentPosition(position)

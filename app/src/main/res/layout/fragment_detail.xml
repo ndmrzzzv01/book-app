@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,9 +10,7 @@
             type="com.books.app.screens.detail.DetailViewModel" />
     </data>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,9 +32,8 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
@@ -49,10 +48,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_sans"
+                android:text="@{viewModel.currentBook.name}"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:text="@{viewModel.currentBook.name}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pager"
@@ -65,10 +64,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_sans"
+                android:text="@{viewModel.currentBook.author}"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp"
-                android:text="@{viewModel.currentBook.author}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_of_the_book"
@@ -97,11 +96,10 @@
                     android:id="@+id/tv_number_of_readers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/nunito_sans"
+                    android:text="@{viewModel.currentBook.views}"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:text="@{viewModel.currentBook.views}"
                     app:layout_constraintEnd_toStartOf="@+id/tv_number_of_likes"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -112,9 +110,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_sans"
+                    android:text="@{viewModel.currentBook.likes}"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:text="@{viewModel.currentBook.likes}"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_number_of_readers"
                     app:layout_constraintEnd_toStartOf="@+id/tv_number_of_quotes"
                     app:layout_constraintStart_toEndOf="@id/tv_number_of_readers"
@@ -126,9 +124,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_sans"
+                    android:text="@{viewModel.currentBook.quotes}"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:text="@{viewModel.currentBook.quotes}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_number_of_likes"
                     app:layout_constraintEnd_toStartOf="@+id/tv_type_of_genre"
                     app:layout_constraintStart_toEndOf="@id/tv_number_of_likes"
@@ -140,9 +138,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_sans"
+                    android:text="@{viewModel.currentBook.genre}"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:text="@{viewModel.currentBook.genre}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_number_of_quotes"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_number_of_quotes"
@@ -229,9 +227,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_sans"
+                    android:text="@{viewModel.currentBook.summary}"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:text="@{viewModel.currentBook.summary}"
                     app:layout_constraintEnd_toEndOf="@id/tv_title_summary"
                     app:layout_constraintStart_toStartOf="@id/tv_title_summary"
                     app:layout_constraintTop_toBottomOf="@id/tv_title_summary"
@@ -245,48 +243,56 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_you_will_also_like"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:fontFamily="@font/nunito_sans"-->
-<!--                    android:text="You will also like"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/second_divider" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tv_you_will_also_like"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="16dp"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    android:layout_marginEnd="16dp"-->
+                <!--                    android:fontFamily="@font/nunito_sans"-->
+                <!--                    android:text="You will also like"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="20sp"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/second_divider" />-->
 
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/rv_also_like"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_you_will_also_like" />-->
+                <!--                <androidx.recyclerview.widget.RecyclerView-->
+                <!--                    android:id="@+id/rv_also_like"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tv_you_will_also_like" />-->
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_read_now"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcv_read_now"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="32dp"
+                    app:cardCornerRadius="16dp"
                     android:layout_marginBottom="8dp"
-                    android:background="#DD48A1"
-                    android:fontFamily="@font/nunito_sans"
-                    android:text="Read now"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/second_divider" />
+                    app:layout_constraintTop_toBottomOf="@id/second_divider">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_read_now"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#DD48A1"
+                        android:fontFamily="@font/nunito_sans"
+                        android:text="Read now"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.card.MaterialCardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
