@@ -24,7 +24,7 @@ class SliderBannerPagerAdapter(
     override fun onBindViewHolder(holder: SliderBannerViewHolder, position: Int) {
         val slider = listOfTopBannerSliders[position]
         holder.mainLayout.setOnClickListener {
-            onBookItemClick.onClick(DetailFragment.SLIDERS_VALUES_KEY, position)
+            onBookItemClick.onClick(DetailFragment.SLIDERS_VALUES_KEY, slider?.bookId ?: 0)
         }
         holder.bind(slider)
     }

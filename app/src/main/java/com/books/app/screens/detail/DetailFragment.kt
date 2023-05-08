@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
-import com.books.app.data.Book
 import com.books.app.databinding.FragmentDetailBinding
 import com.books.app.screens.detail.views.adapters.CarouselPagerAdapter
 import com.books.app.screens.main.MainViewModel
@@ -38,7 +37,7 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,6 +52,7 @@ class DetailFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+
         binding.pager.adjustViewPager(requireContext())
         binding.pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -64,16 +64,9 @@ class DetailFragment : Fragment() {
 
     private fun initObservers() {
         val mapOfBooks = mainViewModel.mapOfBooks.value
-        val listOfTopBannersSliders = mainViewModel.listOfTopBannerSliders.value
-        val key = args.key
-        val values = if (key == SLIDERS_VALUES_KEY) {
-            // TODO
-            listOf<Book>()
-        } else {
-            mapOfBooks?.get(args.key)
-        }
-        detailViewModel.setList(values)
-        adapter.updateList(values ?: listOf())
+        val listOfBooks = detailViewModel.getResultListByKey(args.key, args.index, mapOfBooks)
+        detailViewModel.setList(listOfBooks)
+        adapter.updateList(listOfBooks ?: listOf())
         binding.pager.adapter = adapter
 
         binding.pager.post {
