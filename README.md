@@ -13,3 +13,11 @@ Perfect for casual readers and book lovers who want a simple and convenient way 
 - Glide
 - Coroutines
 - ViewPager 2
+
+## Application
+
+### Main Screen
+<img src="utils/Screenshot_1.png" width="30%" alt="Main Screen" />
+
+### Detail Screen
+<img src="utils/Screenshot_2.png" width="30%" alt="Detail Screen" />
